@@ -1,1 +1,3 @@
 rssagg.exe
+vendor/
+go.sum
