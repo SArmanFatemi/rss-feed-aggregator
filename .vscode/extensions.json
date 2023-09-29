@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "golang.go",
+        "humao.rest-client",
+        "ms-azuretools.vscode-docker",
+        "streetsidesoftware.code-spell-checker",
+    ]
+}
