@@ -44,3 +44,12 @@ func dbModelToFeed(input database.Feed) Feed {
 		UserId:    input.UserID,
 	}
 }
+
+func dbModelsToFeeds(inputs []database.Feed) []Feed {
+	feeds := []Feed{}
+	for _, input := range inputs {
+		feeds = append(feeds, dbModelToFeed(input))
+	}
+
+	return feeds
+}
