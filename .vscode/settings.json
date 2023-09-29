@@ -9,5 +9,10 @@
         "production": {
           "url": "example.com"
         }
-      }
+      },
+      "cSpell.words": [
+        "healthz",
+        "rssagg",
+        "sarmanfatemi"
+      ]
 }
