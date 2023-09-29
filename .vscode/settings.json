@@ -1,0 +1,13 @@
+{      
+    "rest-client.environmentVariables": {
+        "$shared": {
+          "timeout": "60000"
+        },
+        "development": {
+          "url": "http://localhost:8000"
+        },
+        "production": {
+          "url": "example.com"
+        }
+      }
+}

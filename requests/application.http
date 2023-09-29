@@ -1,0 +1,7 @@
+@path=v1
+
+GET {{url}}/{{path}}/healthz
+
+###
+
+GET {{url}}/{{path}}/err
