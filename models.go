@@ -15,12 +15,32 @@ type User struct {
 	ApiKey    string    `json:"apiKey"`
 }
 
-func dbUserToUser(dbUser database.User) User {
+func dbModelToUser(input database.User) User {
 	return User{
-		ID:        dbUser.ID,
-		CreatedAt: dbUser.CreatedAt,
-		UpdatedAt: dbUser.UpdatedAt,
-		Name:      dbUser.Name,
-		ApiKey:    dbUser.ApiKey,
+		ID:        input.ID,
+		CreatedAt: input.CreatedAt,
+		UpdatedAt: input.UpdatedAt,
+		Name:      input.Name,
+		ApiKey:    input.ApiKey,
+	}
+}
+
+type Feed struct {
+	Id        uuid.UUID `json:"id"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
+	Name      string    `json:"name"`
+	Url       string    `json:"url"`
+	UserId    uuid.UUID `json:"userId"`
+}
+
+func dbModelToFeed(input database.Feed) Feed {
+	return Feed{
+		Id:        input.ID,
+		CreatedAt: input.CreatedAt,
+		UpdatedAt: input.UpdatedAt,
+		Name:      input.Name,
+		Url:       input.Url,
+		UserId:    input.UserID,
 	}
 }

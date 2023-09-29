@@ -10,9 +10,10 @@ import (
 	"github.com/sarmanfatemi/rssagg/internal/database"
 )
 
-func (apiCfg *apiConfig) handlerCreateUser(responseWriter http.ResponseWriter, request *http.Request) {
+func (apiCfg *apiConfig) handlerCreateFeed(responseWriter http.ResponseWriter, request *http.Request, user database.User) {
 	type parameters struct {
 		Name string `json:"name"`
+		Url  string `json:"url"`
 	}
 	decoder := json.NewDecoder(request.Body)
 	params := parameters{}
@@ -21,19 +22,17 @@ func (apiCfg *apiConfig) handlerCreateUser(responseWriter http.ResponseWriter, r
 		respondWithError(responseWriter, 400, fmt.Sprintf("Error parsing JSON: %v", err))
 		return
 	}
-	user, err := apiCfg.DB.CreateUser(request.Context(), database.CreateUserParams{
+	feed, err := apiCfg.DB.CreateFeed(request.Context(), database.CreateFeedParams{
 		ID:        uuid.New(),
 		CreatedAt: time.Now().UTC(),
 		UpdatedAt: time.Now().UTC(),
 		Name:      params.Name,
+		Url:       params.Url,
+		UserID:    user.ID,
 	})
 	if err != nil {
 		respondWithError(responseWriter, 500, fmt.Sprintf("Couldn't create user: %v", err))
 		return
 	}
-	respondWithJson(responseWriter, 201, dbModelToUser(user))
-}
-
-func (apiCfg *apiConfig) handlerGetUserByApiKey(responseWriter http.ResponseWriter, request *http.Request, user database.User) {
-	respondWithJson(responseWriter, 200, dbModelToUser(user))
+	respondWithJson(responseWriter, 201, dbModelToFeed(feed))
 }
