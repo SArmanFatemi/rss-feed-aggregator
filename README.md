@@ -7,7 +7,7 @@
 | Construct `vendors` and copy all packages | `go mod vendor` |
 | Installing package | `go github.com/joho/godotenv`, `go get github.com/lib/pq`|
 
-## Required and command tools for work with database
+## Required command tools for work with database
 | Title | Command | Note|
 |---|---|---|
 |Install `goose`|`go install github.com/pressly/goose/v3/cmd/goose@latestH`|
