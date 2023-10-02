@@ -16,3 +16,9 @@ Content-Type: application/json
 Authorization: {{apiKey}}
 
 ###
+
+DELETE  {{url}}/{{path}}/6b1bcb40-77b2-49fe-8f68-212903f5aa1e
+Content-Type: application/json
+Authorization: {{apiKey}}
+
+###
