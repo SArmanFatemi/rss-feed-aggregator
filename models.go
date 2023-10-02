@@ -71,3 +71,12 @@ func dbModelToFeedFollow(input database.FeedFollow) FeedFollow {
 		FeedId:    input.FeedID,
 	}
 }
+
+func dbModelsToFeedFollows(inputs []database.FeedFollow) []FeedFollow {
+	feedFollows := []FeedFollow{}
+	for _, input := range inputs {
+		feedFollows = append(feedFollows, dbModelToFeedFollow(input))
+	}
+
+	return feedFollows
+}

@@ -1,11 +1,18 @@
 @path=v1/feed_follows
+@apiKey=ApiKey 2a3586ccb7267a074f88615582334eac9f3f6b678155cf303775c219e3e84064
 
 POST {{url}}/{{path}}
 Content-Type: application/json
-Authorization: ApiKey 2a3586ccb7267a074f88615582334eac9f3f6b678155cf303775c219e3e84064
+Authorization: {{apiKey}}
 
 {
-    "feedId": "df2acdaf-3af8-43f7-9025-0cea9c0ca9c3"
+    "feedId": "d02ab474-e11c-4c62-a662-9cfbc8057cfa"
 }
+
+###
+
+GET {{url}}/{{path}}
+Content-Type: application/json
+Authorization: {{apiKey}}
 
 ###
