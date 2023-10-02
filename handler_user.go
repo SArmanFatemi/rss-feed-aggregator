@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/sarmanfatemi/rssagg/internal/common"
 	"github.com/sarmanfatemi/rssagg/internal/database"
 )
 
@@ -18,7 +19,7 @@ func (apiCfg *apiConfig) handlerCreateUser(responseWriter http.ResponseWriter, r
 	params := parameters{}
 	err := decoder.Decode(&params)
 	if err != nil {
-		respondWithError(responseWriter, 400, fmt.Sprintf("Error parsing JSON: %v", err))
+		common.RespondWithError(responseWriter, 400, fmt.Sprintf("Error parsing JSON: %v", err))
 		return
 	}
 	user, err := apiCfg.DB.CreateUser(request.Context(), database.CreateUserParams{
@@ -28,14 +29,14 @@ func (apiCfg *apiConfig) handlerCreateUser(responseWriter http.ResponseWriter, r
 		Name:      params.Name,
 	})
 	if err != nil {
-		respondWithError(responseWriter, 500, fmt.Sprintf("Couldn't create user: %v", err))
+		common.RespondWithError(responseWriter, 500, fmt.Sprintf("Couldn't create user: %v", err))
 		return
 	}
-	respondWithJson(responseWriter, 201, dbModelToUser(user))
+	common.RespondWithJson(responseWriter, 201, dbModelToUser(user))
 }
 
 func (apiCfg *apiConfig) handlerGetUserByApiKey(responseWriter http.ResponseWriter, request *http.Request, user database.User) {
-	respondWithJson(responseWriter, 200, dbModelToUser(user))
+	common.RespondWithJson(responseWriter, 200, dbModelToUser(user))
 }
 
 func (apiCfg *apiConfig) handlerGetPostsForUser(responseWriter http.ResponseWriter, request *http.Request, user database.User) {
@@ -44,9 +45,9 @@ func (apiCfg *apiConfig) handlerGetPostsForUser(responseWriter http.ResponseWrit
 		Limit:  10,
 	})
 	if err != nil {
-		respondWithError(responseWriter, 500, fmt.Sprintf("Couldn't get posts: %v", err))
+		common.RespondWithError(responseWriter, 500, fmt.Sprintf("Couldn't get posts: %v", err))
 		return
 	}
 
-	respondWithJson(responseWriter, 200, dbModelsToPosts(posts))
+	common.RespondWithJson(responseWriter, 200, dbModelsToPosts(posts))
 }

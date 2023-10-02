@@ -1,7 +1,11 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/sarmanfatemi/rssagg/internal/common"
+)
 
 func handlerError(responseWriter http.ResponseWriter, r *http.Request) {
-	respondWithError(responseWriter, 400, "something went wrong")
+	common.RespondWithError(responseWriter, 400, "something went wrong")
 }

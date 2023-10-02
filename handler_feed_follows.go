@@ -8,6 +8,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/google/uuid"
+	"github.com/sarmanfatemi/rssagg/internal/common"
 	"github.com/sarmanfatemi/rssagg/internal/database"
 )
 
@@ -19,7 +20,7 @@ func (apiCfg *apiConfig) handlerCreateFeedFollow(responseWriter http.ResponseWri
 	params := parameters{}
 	err := decoder.Decode(&params)
 	if err != nil {
-		respondWithError(responseWriter, 400, fmt.Sprintf("Error parsing JSON: %v", err))
+		common.RespondWithError(responseWriter, 400, fmt.Sprintf("Error parsing JSON: %v", err))
 		return
 	}
 	feedFollow, err := apiCfg.DB.CreateFeedFollow(request.Context(), database.CreateFeedFollowParams{
@@ -30,27 +31,27 @@ func (apiCfg *apiConfig) handlerCreateFeedFollow(responseWriter http.ResponseWri
 		FeedID:    params.FeedID,
 	})
 	if err != nil {
-		respondWithError(responseWriter, 500, fmt.Sprintf("Couldn't create feed follow: %v", err))
+		common.RespondWithError(responseWriter, 500, fmt.Sprintf("Couldn't create feed follow: %v", err))
 		return
 	}
-	respondWithJson(responseWriter, 201, dbModelToFeedFollow(feedFollow))
+	common.RespondWithJson(responseWriter, 201, dbModelToFeedFollow(feedFollow))
 }
 
 func (apiCfg *apiConfig) handlerGetFeedFollows(responseWriter http.ResponseWriter, request *http.Request, user database.User) {
 	feedFollows, err := apiCfg.DB.GetFeedFollows(request.Context(), user.ID)
 	if err != nil {
-		respondWithError(responseWriter, 500, fmt.Sprintf("Couldn't fetch feed follows: %v", err))
+		common.RespondWithError(responseWriter, 500, fmt.Sprintf("Couldn't fetch feed follows: %v", err))
 		return
 	}
 
-	respondWithJson(responseWriter, 200, dbModelsToFeedFollows(feedFollows))
+	common.RespondWithJson(responseWriter, 200, dbModelsToFeedFollows(feedFollows))
 }
 
 func (apiCfg *apiConfig) handlerDeleteFeedFollow(responseWriter http.ResponseWriter, request *http.Request, user database.User) {
 	feedFollowIDString := chi.URLParam(request, "feedFollowID")
 	feedFollowID, err := uuid.Parse(feedFollowIDString)
 	if err != nil {
-		respondWithError(responseWriter, 400, fmt.Sprintf("Couldn't parse feed follow id: %v", err))
+		common.RespondWithError(responseWriter, 400, fmt.Sprintf("Couldn't parse feed follow id: %v", err))
 		return
 	}
 
@@ -59,9 +60,9 @@ func (apiCfg *apiConfig) handlerDeleteFeedFollow(responseWriter http.ResponseWri
 		UserID: user.ID,
 	})
 	if err != nil {
-		respondWithError(responseWriter, 500, fmt.Sprintf("Couldn't delete feed follow: %v", err))
+		common.RespondWithError(responseWriter, 500, fmt.Sprintf("Couldn't delete feed follow: %v", err))
 		return
 	}
 
-	respondWithJson(responseWriter, 200, struct{}{})
+	common.RespondWithJson(responseWriter, 200, struct{}{})
 }

@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/sarmanfatemi/rssagg/internal/common"
 	"github.com/sarmanfatemi/rssagg/internal/database"
 )
 
@@ -19,7 +20,7 @@ func (apiCfg *apiConfig) handlerCreateFeed(responseWriter http.ResponseWriter, r
 	params := parameters{}
 	err := decoder.Decode(&params)
 	if err != nil {
-		respondWithError(responseWriter, 400, fmt.Sprintf("Error parsing JSON: %v", err))
+		common.RespondWithError(responseWriter, 400, fmt.Sprintf("Error parsing JSON: %v", err))
 		return
 	}
 	feed, err := apiCfg.DB.CreateFeed(request.Context(), database.CreateFeedParams{
@@ -31,17 +32,17 @@ func (apiCfg *apiConfig) handlerCreateFeed(responseWriter http.ResponseWriter, r
 		UserID:    user.ID,
 	})
 	if err != nil {
-		respondWithError(responseWriter, 500, fmt.Sprintf("Couldn't create feed: %v", err))
+		common.RespondWithError(responseWriter, 500, fmt.Sprintf("Couldn't create feed: %v", err))
 		return
 	}
-	respondWithJson(responseWriter, 201, dbModelToFeed(feed))
+	common.RespondWithJson(responseWriter, 201, dbModelToFeed(feed))
 }
 
 func (apiCfg *apiConfig) handlerGetFeeds(responseWriter http.ResponseWriter, request *http.Request) {
 	feeds, err := apiCfg.DB.GetFeeds(request.Context())
 	if err != nil {
-		respondWithError(responseWriter, 500, fmt.Sprintf("Couldn't fetch feeds: %v", err))
+		common.RespondWithError(responseWriter, 500, fmt.Sprintf("Couldn't fetch feeds: %v", err))
 		return
 	}
-	respondWithJson(responseWriter, 200, dbModelsToFeeds(feeds))
+	common.RespondWithJson(responseWriter, 200, dbModelsToFeeds(feeds))
 }
