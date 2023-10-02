@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
@@ -29,14 +30,14 @@ func main() {
 		log.Fatal("DB_URL environment variable is not set")
 	}
 
-	db, err := sql.Open("postgres", dbURL)
+	connection, err := sql.Open("postgres", dbURL)
 	if err != nil {
 		log.Fatal(err)
 	}
-	dbQueries := database.New(db)
+	db := database.New(connection)
 
 	apiCfg := apiConfig{
-		DB: dbQueries,
+		DB: db,
 	}
 
 	port := os.Getenv("PORT")
@@ -44,6 +45,9 @@ func main() {
 	if port == "" {
 		log.Fatal("PORT is not found in th environment")
 	}
+
+	// Starting scraper routine
+	go startScraping(db, 10, time.Minute)
 
 	// Configure routing
 	router := chi.NewRouter()
