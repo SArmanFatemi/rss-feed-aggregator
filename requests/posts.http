@@ -1,0 +1,7 @@
+@path=v1/posts
+
+GET {{url}}/{{path}}
+Content-Type: application/json
+Authorization: {{token}}
+
+###
