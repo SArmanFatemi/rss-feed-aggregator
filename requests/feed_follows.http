@@ -1,9 +1,8 @@
 @path=v1/feed_follows
-@apiKey=ApiKey 2a3586ccb7267a074f88615582334eac9f3f6b678155cf303775c219e3e84064
 
 POST {{url}}/{{path}}
 Content-Type: application/json
-Authorization: {{apiKey}}
+Authorization: {{token}}
 
 {
     "feedId": "d02ab474-e11c-4c62-a662-9cfbc8057cfa"
@@ -13,12 +12,12 @@ Authorization: {{apiKey}}
 
 GET {{url}}/{{path}}
 Content-Type: application/json
-Authorization: {{apiKey}}
+Authorization: {{token}}
 
 ###
 
 DELETE  {{url}}/{{path}}/6b1bcb40-77b2-49fe-8f68-212903f5aa1e
 Content-Type: application/json
-Authorization: {{apiKey}}
+Authorization: {{token}}
 
 ###

@@ -11,6 +11,6 @@ Content-Type: application/json
 
 GET {{url}}/{{path}}
 Content-Type: application/json
-Authorization: ApiKey 2a3586ccb7267a074f88615582334eac9f3f6b678155cf303775c219e3e84064
+Authorization: {{token}}
 
 ###

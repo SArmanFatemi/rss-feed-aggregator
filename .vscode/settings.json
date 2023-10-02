@@ -4,7 +4,8 @@
           "timeout": "60000"
         },
         "development": {
-          "url": "http://localhost:8000"
+          "url": "http://localhost:8000",
+          "token": "ApiKey fd73e7a01b036636ef7330dfc068838d4062009e45c58e1e04ffa8cb11dca1d2"
         },
         "production": {
           "url": "example.com"
