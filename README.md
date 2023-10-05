@@ -40,7 +40,7 @@ Here are some important notes to consider when working with migrations:
 To generate type-safe Go code based on our migrations, we use SQLC. Here's the command to run [`sqlc`](https://docs.sqlc.dev/en/stable/overview/install.html) (assuming you have Docker installed):
 
 ```shell
-docker run --rm -v $(pwd):/src -w /src sqlc/sqlc generate
+docker run --rm -v ${PWD}:/src -w /src sqlc/sqlc generate
 ```
 
 Note: This assumes you are executing the commands in a terminal or command prompt.
