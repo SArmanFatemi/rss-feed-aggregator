@@ -44,3 +44,13 @@ docker run --rm -v ${PWD}:/src -w /src sqlc/sqlc generate
 ```
 
 Note: This assumes you are executing the commands in a terminal or command prompt.
+
+## Makefile
+We are using `Makefile` for this project, so you can run the commands by using `make command_name`. For installing `Makefile` on Windows use:
+```PowerShell
+winget install GnuWin32.Make
+```
+Please note that after installing `Makefile` you need to add the following to your `Path` environment variable and then restart your terminal:
+```PowerShell
+C:\Program Files (x86)\GnuWin32\bin
+```
