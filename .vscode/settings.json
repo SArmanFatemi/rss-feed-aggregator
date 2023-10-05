@@ -15,5 +15,8 @@
         "healthz",
         "rssagg",
         "sarmanfatemi"
-      ]
+      ],
+      "search.exclude": {
+        "**/vendor": true
+      }
 }
