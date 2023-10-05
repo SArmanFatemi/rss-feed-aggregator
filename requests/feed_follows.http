@@ -5,7 +5,7 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "feedId": "31e76e7a-13ab-4bf4-a2ef-47f079fb3df7"
+    "feedId": "410937a0-aa58-4de5-9639-5ba1e8498411"
 }
 
 ###
@@ -16,7 +16,7 @@ Authorization: {{token}}
 
 ###
 
-DELETE  {{url}}/{{path}}/6b1bcb40-77b2-49fe-8f68-212903f5aa1e
+DELETE  {{url}}/{{path}}/56b0f966-33f8-4a81-93cd-97fd838c38ca
 Content-Type: application/json
 Authorization: {{token}}
 

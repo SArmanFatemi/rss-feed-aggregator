@@ -1,4 +1,4 @@
-package main
+package handlers
 
 import (
 	"net/http"
@@ -6,6 +6,6 @@ import (
 	"github.com/sarmanfatemi/rssagg/internal/common"
 )
 
-func handlerError(responseWriter http.ResponseWriter, r *http.Request) {
+func HandlerError(responseWriter http.ResponseWriter, r *http.Request) {
 	common.RespondWithError(responseWriter, 400, "something went wrong")
 }

@@ -5,7 +5,7 @@
         },
         "development": {
           "url": "http://localhost:8000",
-          "token": "ApiKey fd73e7a01b036636ef7330dfc068838d4062009e45c58e1e04ffa8cb11dca1d2"
+          "token": "ApiKey 33818e047ce7da055949e199431266ae778eaf81606348f4e2f8512248189c7a"
         },
         "production": {
           "url": "example.com"

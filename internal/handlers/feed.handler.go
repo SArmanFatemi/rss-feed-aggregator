@@ -1,4 +1,4 @@
-package main
+package handlers
 
 import (
 	"encoding/json"
@@ -9,9 +9,10 @@ import (
 	"github.com/google/uuid"
 	"github.com/sarmanfatemi/rssagg/internal/common"
 	"github.com/sarmanfatemi/rssagg/internal/database"
+	"github.com/sarmanfatemi/rssagg/internal/models"
 )
 
-func (apiCfg *apiConfig) handlerCreateFeed(responseWriter http.ResponseWriter, request *http.Request, user database.User) {
+func HandlerCreateFeed(responseWriter http.ResponseWriter, request *http.Request, user database.User, apiCfg *models.ApiConfiguration) {
 	type parameters struct {
 		Name string `json:"name"`
 		Url  string `json:"url"`
@@ -23,7 +24,7 @@ func (apiCfg *apiConfig) handlerCreateFeed(responseWriter http.ResponseWriter, r
 		common.RespondWithError(responseWriter, 400, fmt.Sprintf("Error parsing JSON: %v", err))
 		return
 	}
-	feed, err := apiCfg.DB.CreateFeed(request.Context(), database.CreateFeedParams{
+	feed, err := apiCfg.DbQueries.CreateFeed(request.Context(), database.CreateFeedParams{
 		ID:        uuid.New(),
 		CreatedAt: time.Now().UTC(),
 		UpdatedAt: time.Now().UTC(),
@@ -35,14 +36,14 @@ func (apiCfg *apiConfig) handlerCreateFeed(responseWriter http.ResponseWriter, r
 		common.RespondWithError(responseWriter, 500, fmt.Sprintf("Couldn't create feed: %v", err))
 		return
 	}
-	common.RespondWithJson(responseWriter, 201, dbModelToFeed(feed))
+	common.RespondWithJson(responseWriter, 201, models.DbModelToFeed(feed))
 }
 
-func (apiCfg *apiConfig) handlerGetFeeds(responseWriter http.ResponseWriter, request *http.Request) {
-	feeds, err := apiCfg.DB.GetFeeds(request.Context())
+func HandlerGetFeeds(responseWriter http.ResponseWriter, request *http.Request, apiCfg *models.ApiConfiguration) {
+	feeds, err := apiCfg.DbQueries.GetFeeds(request.Context())
 	if err != nil {
 		common.RespondWithError(responseWriter, 500, fmt.Sprintf("Couldn't fetch feeds: %v", err))
 		return
 	}
-	common.RespondWithJson(responseWriter, 200, dbModelsToFeeds(feeds))
+	common.RespondWithJson(responseWriter, 200, models.DbModelsToFeeds(feeds))
 }
