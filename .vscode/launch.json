@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch app",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}",
+            "env": {
+                // "ENVIRONMENT_VARIABLE_NAME": "ENVIRONMENT_VARIABLE_VALUE",
+            }
+        }
+    ]
+}
